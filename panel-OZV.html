@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=0.7">
+<title>پنل پرسنل VIP</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;500;700;900&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Vazirmatn',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#0a0a0a,#7a0000);
+    padding:25px;
+}
+
+/* 🔙 HOME */
+.home-btn{
+    position:fixed;
+    top:15px;
+    left:15px;
+    background:linear-gradient(135deg,#b71c1c,#ff3b3b);
+    color:#fff;
+    text-decoration:none;
+    padding:10px 16px;
+    border-radius:12px;
+    font-weight:700;
+    font-size:13px;
+    z-index:9999;
+    transition:0.3s;
+}
+
+.home-btn:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 25px rgba(255,0,0,0.5);
+}
+
+/* HEADER */
+.header{
+    text-align:center;
+    color:#fff;
+    margin-bottom:30px;
+}
+
+.header h1{
+    font-size:34px;
+    font-weight:900;
+}
+
+.header p{
+    font-size:13px;
+    opacity:0.8;
+}
+
+/* GRID */
+.grid{
+    max-width:1100px;
+    margin:auto;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+/* CARD */
+.card{
+    display:flex;
+    background:rgba(255,255,255,0.97);
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 20px 50px rgba(0,0,0,0.35);
+
+    opacity:0;
+    transform:translateY(60px);
+    transition:0.8s cubic-bezier(0.2,1,0.2,1);
+}
+
+.card.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* LIGHT */
+.card::after{
+    content:"";
+    position:absolute;
+    top:-50%;
+    left:-50%;
+    width:200%;
+    height:200%;
+    background:linear-gradient(120deg,transparent,rgba(255,255,255,0.15),transparent);
+    transform:rotate(25deg);
+    animation:shine 6s infinite;
+}
+
+@keyframes shine{
+    0%{transform:translateX(-100%) rotate(25deg);}
+    100%{transform:translateX(100%) rotate(25deg);}
+}
+
+/* SIDE */
+.side{
+    width:210px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    font-weight:900;
+    color:#fff;
+}
+
+/* CONTENT */
+.content{
+    padding:24px;
+    flex:1;
+}
+
+.name{
+    font-size:24px;
+    font-weight:900;
+    color:#111;
+    margin-bottom:8px;
+}
+
+.role{
+    font-size:14px;
+    color:#444;
+    line-height:1.9;
+}
+
+/* 🔵 VERIFIED BADGE */
+.verified-gaming{
+    display:inline-block;
+    width:18px;
+    height:18px;
+    margin-right:6px;
+    position:relative;
+    top:2px;
+
+    background:#1d9bf0;
+    clip-path:polygon(50% 0%,95% 25%,95% 75%,50% 100%,5% 75%,5% 25%);
+    box-shadow:0 0 12px rgba(29,155,240,0.7);
+}
+
+.verified-gaming::after{
+    content:"";
+    position:absolute;
+    left:5px;
+    top:3px;
+
+    width:4px;
+    height:8px;
+    border:solid white;
+    border-width:0 2px 2px 0;
+    transform:rotate(45deg);
+}
+
+/* COLORS */
+.black .side{background:#000;}
+.diamond .side{background:linear-gradient(135deg,#1b4d89,#4aa3ff);}
+.gold .side{background:#b8860b;}
+
+/* 👑 BOSS ULTRA */
+.boss{
+    transform:translateX(180%) scale(0.8);
+    opacity:0;
+    filter:blur(6px);
+    border:2px solid gold;
+    box-shadow:0 0 0 rgba(255,215,0,0);
+    transition:1.2s cubic-bezier(0.2,1,0.2,1);
+    position:relative;
+}
+
+.boss.enter{
+    transform:translateX(0) scale(1.1);
+    opacity:1;
+    filter:blur(0);
+    box-shadow:0 0 40px rgba(255,215,0,0.5),
+               0 0 120px rgba(255,215,0,0.2);
+}
+
+.boss.up{
+    transform:translateX(0) scale(1.15);
+    animation:bossShake 0.6s ease;
+    box-shadow:0 0 60px rgba(255,215,0,0.7),
+               0 0 150px rgba(255,200,0,0.3);
+}
+
+@keyframes bossShake{
+    0%{transform:translateX(0) scale(1.15);}
+    20%{transform:translateX(-2px);}
+    40%{transform:translateX(2px);}
+    60%{transform:translateX(-1px);}
+    80%{transform:translateX(1px);}
+    100%{transform:translateX(0);}
+}
+
+/* CREATOR */
+.owner{
+    transform:translateX(140%) scale(0.85);
+    opacity:0;
+}
+
+.owner.enter{
+    transform:translateX(0) translateY(70px) scale(1.05);
+    opacity:1;
+}
+
+.owner.up{
+    transform:translateX(0) scale(1.1);
+}
+
+/* FOOTER */
+.footer{
+    text-align:center;
+    margin-top:25px;
+    color:#fff;
+    font-size:13px;
+    opacity:0.8;
+}
+</style>
+</head>
+
+<body>
+
+<a href="index.html" class="home-btn">🏠 بازگشت به خانه</a>
+
+<div class="header">
+    <h1 id="title"></h1>
+    <p>سیستم مدیریت حرفه‌ای پرسنل فروشگاه</p>
+</div>
+
+<div class="grid">
+
+    <div class="card boss black">
+        <div class="side">BOSS</div>
+        <div class="content">
+            <div class="name">میر جلیل هاشمی</div>
+            <div class="role">
+                مدیر کل و صاحب مجموعه<br>
+                کنترل کامل تصمیمات، مدیریت مالی و نظارت کل سیستم
+            </div>
+        </div>
+    </div>
+
+    <div class="card diamond">
+        <div class="side">DIAMOND</div>
+        <div class="content">
+            <div class="name">رحیم & هاشم هاشمی</div>
+            <div class="role">
+                مدیریت مالی، حسابداری حرفه‌ای، تحلیل درآمد و کنترل سرمایه
+            </div>
+        </div>
+    </div>
+
+    <div class="card gold">
+        <div class="side">GOLD</div>
+        <div class="content">
+            <div class="name">سجاد هاشمی</div>
+            <div class="role">
+                مدیر انبار و کنترل موجودی کالا
+            </div>
+        </div>
+    </div>
+
+    <div class="card gold owner">
+        <div class="side">CREATOR</div>
+        <div class="content">
+            <div class="name">متین هاشمی <span class="verified-gaming"></span></div>
+            <div class="role">
+                طراح و توسعه‌دهنده سایت فروشگاه، پشتیبانی فنی و ارتقای سیستم
+            </div>
+        </div>
+    </div>
+
+    <div class="card gold">
+        <div class="side">GOLD</div>
+        <div class="content">
+            <div class="name">ایوب حق‌محمدی</div>
+            <div class="role">
+                نظم‌دهی محصولات و آماده‌سازی سفارش‌ها
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="footer">
+    طراحی شده توسط <b>متین هاشمی</b> ❤️
+</div>
+
+<script>
+
+let text = "پنل مدیریت حرفه‌ای";
+let i = 0;
+
+function typing(){
+    if(i < text.length){
+        document.getElementById("title").innerHTML += text[i];
+        i++;
+        setTimeout(typing,55);
+    }
+}
+typing();
+
+window.onload = function(){
+
+    const cards = document.querySelectorAll(".card");
+    let i = 0;
+
+    let interval = setInterval(()=>{
+        if(i < cards.length){
+            cards[i].classList.add("show");
+            i++;
+        }else{
+            clearInterval(interval);
+
+            setTimeout(()=>{
+                document.querySelector(".boss").classList.add("enter");
+                setTimeout(()=>{
+                    document.querySelector(".boss").classList.add("up");
+                },1200);
+            },500);
+
+            setTimeout(()=>{
+                let creator = document.querySelector(".owner");
+                creator.classList.add("enter");
+                setTimeout(()=>{
+                    creator.classList.add("up");
+                },700);
+            },8500);
+        }
+    },1800);
+};
+
+</script>
+
+</body>
+</html>
